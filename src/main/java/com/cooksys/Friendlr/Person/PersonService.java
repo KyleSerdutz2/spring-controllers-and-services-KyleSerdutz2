@@ -97,9 +97,11 @@ public class PersonService {
 		if(id == null  || id == 0 || id < 0) {
 			throw new IdNotAvailableException(id);
 		} else if (id > 0) {
+			Person savedPerson = null;
 			boolean findMatch = false;
 			for(Person ourPerson: people) {
 				if(id == ourPerson.getId()) {
+					savedPerson = ourPerson;
 					findMatch = true;
 				}
 			}
@@ -107,7 +109,7 @@ public class PersonService {
 			if(!findMatch)
 				throw new IdNotAvailableException(id);
 			else
-				people.remove(id);
+				people.remove(savedPerson);
 		}
 		return true;
 	}
